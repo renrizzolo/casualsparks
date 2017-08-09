@@ -3,7 +3,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  NavLink
 } from 'react-router-dom'
 
 import '../styles/index.scss';
@@ -20,7 +20,7 @@ export default class App extends React.Component {
 
 	handleZoomEntered(){
 		console.log('handleZoomEntered');
-			this.setState({intro:true, show:true})
+			//this.setState({intro:true, show:true})
 	}
 	handleIntro(){
 		console.log('handleint');
@@ -33,10 +33,9 @@ export default class App extends React.Component {
 
       
       <div>
-         <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/topics">Topics</Link></li>
+         <ul className="nav">
+        <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
+        <li><NavLink to="/contact" activeClassName="active">Contact</NavLink></li>
       </ul>
       {!this.state.intro &&
       	<LogoSmall/>
@@ -44,12 +43,12 @@ export default class App extends React.Component {
      		<div className="flex-center flex-container__row viewport-half">
 
           <Zoom key="circle" onEntered={() => this.setState({showOuter:true})} mountOnEnter unmountOnExit in={this.state.showZoom}>
-      			<div className="cs-circle" id="cs-circle" style={{backgroundColor: !this.state.intro ? '#0b2a44' : null}}>
+      			<div className={this.state.intro ? "cs-circle" : "cs-circle darker"} id="cs-circle">
       			</div>
           </Zoom>
 
 		  <Route exact path="/" render={props => <Home show={this.state.show} handleIntro={this.handleIntro.bind(this)} showOuter={this.state.showOuter} {...props} />}/>
-      <Route path="/contact" render={props => <Contact handleZoomEntered={this.handleZoomEntered.bind(this)}  show={this.state.show} {...props}/> }/>
+      <Route path="/contact" render={props => <Contact handleIntro={this.handleIntro.bind(this)} handleZoomEntered={this.handleZoomEntered.bind(this)}  showOuter={this.state.showOuter} show={this.state.show} {...props}/> }/>
 
 		    	 <FadeZoom key="circle-outer-1" timeout={500} mountOnEnter unmountOnExit in={!this.state.intro}>
 		    		<div className="cs-circle cs-circle__outer-1">
@@ -82,8 +81,8 @@ const Home = (props) => {
 
 const Contact = (props) => {
 	return (
-  <Fade key="circle-menu" mountOnEnter unmountOnExit in={!props.show} onExit={props.handleZoomEntered}>
-   	<div className="circle-text flex-container__column" style={{clipPath:'url(#circle-path)'}}>
+  <Fade key="circle-menu" mountOnEnter unmountOnExit onEntered={props.handleIntro} in={!props.show || props.showOuter} >
+   	<div className="circle-text flex-container__column">
 				<h1 className="heading">Contact</h1>
 				<div className="social">
 					<SocialLink title="/casualsparks" href="https://facebook.com/casualsparks" icon={require('./img/social/facebook-round.svg')}/>
