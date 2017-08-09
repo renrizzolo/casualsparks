@@ -1,7 +1,13 @@
 import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
 import '../styles/index.scss';
+
 export default class App extends React.Component {
 	constructor(props, context) {
     super(props, context);
@@ -9,42 +15,42 @@ export default class App extends React.Component {
   }
   
 	componentWillMount(){
-		this.setState({show:true, showZoom: true})
+		this.setState({show:true, intro:true, showZoom: true})
 	}
 
-	handleZoomEntered = () =>{
-			this.setState({showOuter:true})
+	handleZoomEntered(){
+		console.log('handleZoomEntered');
+			this.setState({intro:true, show:true})
+	}
+	handleIntro(){
+		console.log('handleint');
+		this.setState({intro:false, show: false})
 	}
 
   render() {
     return (
+    <Router>
+
+      
       <div>
+         <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/topics">Topics</Link></li>
+      </ul>
       {!this.state.intro &&
       	<LogoSmall/>
 			}
      		<div className="flex-center flex-container__row viewport-half">
+
           <Zoom key="circle" onEntered={() => this.setState({showOuter:true})} mountOnEnter unmountOnExit in={this.state.showZoom}>
-      			<div className="cs-circle" style={{backgroundColor: !this.state.intro ? '#0b2a44' : null}}>
+      			<div className="cs-circle" id="cs-circle" style={{backgroundColor: !this.state.intro ? '#0b2a44' : null}}>
       			</div>
           </Zoom>
-           	
-          <Fade key="circle-text" mountOnEnter unmountOnExit in={this.state.show}>
-			     	<div className="circle-text flex-center flex-container__column">
-			    		<SvgLogo in={this.state.showOuter}  onEntered={() => this.setState({intro:false, show: false})}/>
-			    	</div>
-		    	</Fade>
-		    	      	
-          <Fade key="circle-menu" mountOnEnter unmountOnExit in={!this.state.show}>
-			     	<div className="circle-text flex-container__column">
-								<h1 className="heading">Contact</h1>
-								<div className="social">
-									<SocialLink title="/casualsparks" href="https://facebook.com/casualsparks" icon={require('./img/social/facebook-round.svg')}/>
-									<SocialLink title="@casualsparks" href="https://twitter.com/casualsparks" icon={require('./img/social/twitter-round.svg')}/>
-									<SocialLink title="/casualsparks" href="https://soundcloud.com/casualsparks" icon={require('./img/social/soundcloud-round.svg')}/>
-								</div>			  
-			    	</div>
-		    	</Fade>
-		    	  
+
+		  <Route exact path="/" render={props => <Home show={this.state.show} handleIntro={this.handleIntro.bind(this)} showOuter={this.state.showOuter} {...props} />}/>
+      <Route path="/contact" render={props => <Contact handleZoomEntered={this.handleZoomEntered.bind(this)}  show={this.state.show} {...props}/> }/>
+
 		    	 <FadeZoom key="circle-outer-1" timeout={500} mountOnEnter unmountOnExit in={!this.state.intro}>
 		    		<div className="cs-circle cs-circle__outer-1">
 		    		</div>
@@ -59,8 +65,34 @@ export default class App extends React.Component {
 		    	</FadeZoom>
 	      </div>
       </div>
+      </Router>
     )
   }
+}
+
+const Home = (props) => {
+	return (          
+		<Fade key="circle-text" mountOnEnter unmountOnExit onEntered={props.handleIntro} in={props.showOuter}>
+     	<div className="circle-text flex-center flex-container__column">
+    		<SvgLogo/>
+    	</div>
+  	</Fade>
+	);
+}
+
+const Contact = (props) => {
+	return (
+  <Fade key="circle-menu" mountOnEnter unmountOnExit in={!props.show} onExit={props.handleZoomEntered}>
+   	<div className="circle-text flex-container__column" style={{clipPath:'url(#circle-path)'}}>
+				<h1 className="heading">Contact</h1>
+				<div className="social">
+					<SocialLink title="/casualsparks" href="https://facebook.com/casualsparks" icon={require('./img/social/facebook-round.svg')}/>
+					<SocialLink title="@casualsparks" href="https://twitter.com/casualsparks" icon={require('./img/social/twitter-round.svg')}/>
+					<SocialLink title="/casualsparks" href="https://soundcloud.com/casualsparks" icon={require('./img/social/soundcloud-round.svg')}/>
+				</div>			  
+  	</div>
+	</Fade>
+	);
 }
 const SocialLink = (props) => {
 return (
@@ -76,7 +108,7 @@ const Zoom = (props) => {
 		<CSSTransition
       classNames="zoom"
       appear={true}
-      timeout={2500}
+      timeout={1500}
       {...props}
     >
     </CSSTransition>
@@ -117,15 +149,9 @@ const SvgLogo = (props) => {
   <g>
     <path className="stroke-2" d="M1178.8,618.19c-21.78,56.23-41,87.64-57.24,87.64-11.65,0-19.25-10.64-19.25-44.58,0-16.21,1.52-36,4.05-57.75,20.26-24.82,54.2-74.47,75-140.83,5.07-15.7,15.2-51.67,15.2-81.56,0-25.84-7.6-47.11-33.94-47.11-29.38,0-61.3,57.24-84.09,184.39-6.54,37.3-11.39,70.79-14,99.8h-.16c-24.32,62.82-45.59,87.13-51.16,87.13-2.53,0-4.05-3.55-4.05-11.14a67.25,67.25,0,0,1,1-13.17c7.09-50.15,16.72-104.86,31.91-172.24h-36l-5.57,28.37c-3.55-22.8-14.18-33.94-32.93-33.94-35.72,0-66.4,58-79.86,117.16-21.87,56.79-38.34,84.46-51.35,84.46-4.56,0-10.13-2.53-10.13-17.22,0-41.54,14.69-100.3,32.42-179.33H815.6c-6.08,25.33-15.7,62.82-23.3,105.87l-3,16.72c-10.64,44.07-25.84,74-33.94,74-4.56,0-10.13-2.53-10.13-17.22,0-20.26,4.56-44.07,10.13-72.44,12.66-64.84,22.8-106.89,22.8-106.89H735.05s-10.13,40-22.8,105.87q-.49,2.63-1,5.25c-7.46,19.31-15.43,37.62-24.86,53v-2c0-56.74-49.64-109.42-51.16-152a631.83,631.83,0,0,0,15.2-74L616,437.85c-8.11,24.82-11.65,47.11-11.65,67.37a213,213,0,0,0,6.08,48.63c-9.63,24.32-19.25,47.11-25.84,64.34v0C560.29,681,539,705.32,533.45,705.32c-2.53,0-4.05-3.55-4.05-11.14a67.25,67.25,0,0,1,1-13.17c7.09-50.15,16.72-104.86,31.91-172.24h-36l-5.57,28.37c-3.55-22.8-14.18-33.94-32.93-33.94-35.67,0-66.33,57.9-79.81,117-22.14,54.4-49.14,81.12-73.17,81.12-25.84,0-36-26.34-36-58.26,0-48.12,22.8-108.41,49.14-108.41,7.09,0,10.13,7.09,10.13,17.73,0,15.2-6.59,37.49-16.72,54.71l32.42,17.22c10.13-21.78,16.72-46.61,16.72-68.39,0-29.38-11.65-52.68-40.53-52.68-56.23,0-91.69,83.59-91.69,152.48,0,48.12,17.22,88.65,56.74,88.65,36.17,0,65.67-35.62,85.72-71.26q-.12,3.51-.12,6.93c0,37,10.13,64.34,35,64.34,29.38,0,47.11-26.85,58.76-57.75v5.57c0,35,9.12,49.64,25.33,49.64,23.3,0,48.12-35.46,79-116.51v0c5.57-15.19,12.15-30.89,17.72-47.6,11.14,36,25.84,66.36,25.84,97.77,0,18.24-7.09,27.35-19.76,27.35-9.63,0-15.7-4.05-22.29-15.2l-30.9,22.29c7.09,20.77,26.34,34.45,50.15,34.45,39.14,0,64.8-29.83,84.77-69.06q-.17,4.22-.18,8.27c0,33.94,9.12,58.26,36,58.26,19.76,0,34.45-16.72,45.59-41.54,3,24.82,13.17,41.54,35.46,41.54,27.41,0,44.45-25.59,59.28-59.59.4,35.85,10.62,62.13,34.94,62.13,29.38,0,47.11-26.85,58.76-57.75v5.57c0,35,9.12,49.64,25.33,49.64,19.09,0,39.19-23.8,62.82-76.94.47,50.75,12.74,79.47,42.54,79.47,32.93,0,56.23-38,86.12-119v-.51C1191,622.24,1181.33,618.19,1178.8,618.19Zm-9.62-250.25c2.53,0,5.07,4.05,5.07,11.14-.51,61.8-38,146.4-63.32,192.5C1125.61,477.36,1155.5,367.94,1169.18,367.94ZM453.91,701.27c-7.6,0-10.64-10.64-10.64-26.34,0-46.1,25.84-135.26,47.11-135.26,11.14,0,15.7,13.17,15.7,31.91C506.09,618.7,477.22,701.27,453.91,701.27Zm479.71,0c-7.6,0-10.64-10.64-10.64-26.34,0-46.1,25.84-135.26,47.11-135.26,11.14,0,15.7,13.17,15.7,31.91C985.8,618.7,956.93,701.27,933.63,701.27Z" transform="translate(0.09)"/>
     <g>
-    	<CSSTransition
-      classNames="star"
-      appear={true}
-      timeout={2500}
-       {...props}
-      mountOnEnter unmountOnExit
-      >
+
       	<path className="star" d="M278.77,511.36c.09.76.61.95,1.16.42l39.95-38.57a3,3,0,0,1,2.36-.69l54.41,11c.75.15,1.09-.29.75-1l-24.33-49.93a3,3,0,0,1,.08-2.46l27.32-48.33c.38-.67.06-1.12-.69-1l-55,7.73a3,3,0,0,1-2.32-.83l-37.53-40.91c-.52-.56-1-.41-1.18.34l-9.64,54.69a3,3,0,0,1-1.51,1.95l-50.52,23c-.7.32-.71.87,0,1.23l49,26.1a3,3,0,0,1,1.39,2Z" transform="translate(0.09)"/>
-    	</CSSTransition>
+    	
     </g>
   </g>
   <g>
@@ -143,8 +169,8 @@ const SvgLogo = (props) => {
 
 const LogoSmall = () => {
  return (
- 	<a href="/">
- 	<div className="logo-small">
+ 	<a href="/" className="logo-small">
+ 	<div>
 		<svg id="cs-logo-small" data-name="cs logo small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1417.5 1417.43" style={{width:'100px'}}>
 		  <title>Casual Sparks</title>
 		  <path className="cls-1" d="M1417.41,708.76c0,391.31-317.35,708.67-708.77,708.67S-.09,1100.07-.09,708.76,317.24,0,708.64,0,1417.41,317.32,1417.41,708.76Z" transform="translate(0.09)"/>
