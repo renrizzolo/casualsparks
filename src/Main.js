@@ -9,7 +9,7 @@ import { withRouter } from 'react-router';
 
 import '../styles/index.scss';
 
-class App extends React.Component {
+class Main extends React.Component {
 	constructor(props, context) {
     super(props, context);
     this.state = { show: false, showZoom: false, showOuter: false, intro: true, showMenu: false, };
@@ -75,7 +75,7 @@ componentWillReceiveProps(nextProps) {
     )
   }
 }
-export default withRouter(App);
+export default withRouter(Main);
 
 const Home = (props) => {
 	return (          

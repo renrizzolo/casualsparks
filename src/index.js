@@ -1,15 +1,30 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import App from './App.js';
 
-render( <AppContainer><App/></AppContainer>, document.getElementById("app"));
+import {
+  BrowserRouter as Router,
+} from 'react-router-dom';
+
+import App from './app';
+
+class AppWrap extends React.Component {
+  render() {
+    return (
+    <Router>
+    	<App/>
+    </Router>
+    )
+  }
+}
+
+render( <AppContainer><AppWrap/></AppContainer>, document.getElementById("app"));
 
 if (module && module.hot) {
   module.hot.accept('./App', () => {
     render(
       <AppContainer>
-        <App/>
+        <AppWrap/>
       </AppContainer>,
       document.getElementById("app")
     );
