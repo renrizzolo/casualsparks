@@ -4,18 +4,28 @@ var loaders = require('./webpack.loaders');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+
+const SERVICE_WORKER_NAME = 'service-worker.js';
+const PRECACHE_ID = 'cs-react-v1';
+const ROOT_URL = 'https://casualsparks.com/';
 
 loaders.push({
   test: /\.scss$/,
-  loader: ExtractTextPlugin.extract({fallback: 'style-loader', use : 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded'}),
+  loader: ExtractTextPlugin.extract({
+    fallback: 'style-loader', 
+    use: 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!postcss-loader!sass-loader?outputStyle=expanded'}),
   exclude: ['node_modules']
 });
 
 module.exports = {
-  entry: [
-    './src/index.js',
-    './styles/index.scss'
-  ],
+  // entry: [
+  //   './src/index.js',
+  //   './styles/index.scss',
+  // ],
+   entry: {
+    main: path.resolve(__dirname, 'src'),
+  },
   output: {
     publicPath: './',		
     path: path.join(__dirname, 'public'),
@@ -28,12 +38,29 @@ module.exports = {
     loaders
   },
   plugins: [
-    new WebpackCleanupPlugin(),
-    new webpack.DefinePlugin({
+      new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
       }
     }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      files: {
+        css: ['style.css'],
+        js: ['bundle.js'],
+      }
+    }),
+      new SWPrecacheWebpackPlugin({
+      cacheId: PRECACHE_ID,
+      filename: SERVICE_WORKER_NAME,
+      minify: true,
+      mergeStaticsConfig: true,
+      navigateFallback: ROOT_URL + 'index.html',
+    debug:true,
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    }),
+    new WebpackCleanupPlugin({exclude: [SERVICE_WORKER_NAME]}),
+
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -47,12 +74,6 @@ module.exports = {
       filename: 'style.css',
       allChunks: true
     }),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      files: {
-        css: ['style.css'],
-        js: ['bundle.js'],
-      }
-    })
+
   ]
 };

@@ -11,7 +11,16 @@ const PORT = process.env.PORT || "8888";
 
 loaders.push({
   test: /\.scss$/,
-  loaders: ['style-loader', 'css-loader?importLoaders=1', 'sass-loader'],
+  loaders: ['style-loader', {
+    loader: 'css-loader', options: { 
+      importLoaders: 1 
+    }
+  },
+  { 
+    loader: 'postcss-loader' 
+  }, 
+  'sass-loader'
+  ],
   exclude: ['node_modules']
 });
 
@@ -60,5 +69,6 @@ module.exports = {
         js: [ "bundle.js"],
       }
     }),
+
   ]
 };

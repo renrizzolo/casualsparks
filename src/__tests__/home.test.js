@@ -3,10 +3,11 @@ import Enzyme, { mount }  from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
-import AppWrapper from '../AppWrapper';
 
-describe('AppWrapper', () => {
+import Home from '../views/home';
+
+describe('Home', () => {
 		it('renders without crashing', () => {
-				mount(<AppWrapper />);
+				mount(<Home />);
 		});
 });
