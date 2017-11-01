@@ -25,9 +25,12 @@ p{
 	letter-spacing: 1px;
 	line-height: 1.33em;
 	font-family: $font-sans;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 }
 h1, h2, h3, h4, h5, h6 {
 	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 	font-family: $font-serif;
 }
 .heading {
@@ -81,7 +84,7 @@ h1, h2, h3, h4, h5, h6 {
 		border-top: 2px solid $cs-lightblue;
 		display: none;
 		justify-content: flex-end;
-		&.releases a {
+		&.music a {
 	    	color: $lightpearl;
 	    }
 		a{
@@ -114,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
     &.desktop{
     		position: absolute;
 				right: 0;
-	    	&.releases {
+	    	&.music {
 	    	background-color: rgba(11, 42, 68, 0.67);
 	    		li a {
 		    	color: $lightpearl;
@@ -245,24 +248,84 @@ h1, h2, h3, h4, h5, h6 {
 	}
 }
 
-.release-grid{
+.item-grid{
 	display: grid;
 	grid-template-rows: auto;
 	justify-items: start;
  	grid-template-columns: repeat(2, 1fr);
   grid-gap:2rem;
-  @media screen and (max-width: 768px){
-		 grid-template-columns: 1fr;
+  margin-bottom: 5rem;
+  .item-grid__heading{
+  	grid-column-start: 2;
+    width: 100%;
+    margin: 0;
+    margin-left: -50%;
+    text-align: center;
   }
-	.release-item{
+  @media screen and (max-width: 768px){
+		grid-template-columns: 1fr;
+		.item-grid__heading{
+			grid-column-start: 1;
+			margin-left: 0;
+		}
+  }
+	.item{
 		width: 100%;
 		border-bottom: 2px solid $cs-lightblue;
     padding-bottom: 2rem;
+    .track-list{
+    	h2 {
+    		cursor: pointer;
+    		span{
+    			transform: rotate(0deg);
+    			display: inline-block;
+    				&::before{
+    				font-size:0.75rem;
+    				content:"\25ba";
+    			}
+    		}
+    	}
+    	&.expanded {
+    		h2{
+    			span{
+    				transform: rotate(90deg);
+    			}
+    		}
+    		ol{
+    			visibility: visible;
+    			opacity: 1;
+    			transition: opacity 300ms ease-out;
+    			@for $i from 1 through 30 {
+	  & li:nth-of-type(#{$i}) {
+    				transition: all 300ms #{$i}50ms ease-in;
+						position: relative;
+						top:0;
+						opacity: 1;
+					}
+    		}
+    	}
+    }
+    	ol{
+				visibility: hidden;
+				opacity: 0;
+				transition: opacity 300ms ease-in;
+				position: relative;
+				li{
+					line-height: 1.5;
+					font-size: 1.25rem;
+					font-weight: 200;
+					position: absolute;
+					top:0;
+					opacity: 0;
+					transition: all 0ms ease-in;
+				}
+			}
+		}
 		header{
 			margin: 2rem 0;
 			display: flex;
 			align-items:flex-start;
-		.release-info{
+		.item-info{
 				flex-direction:row;
 		}
 		h1{

@@ -10,7 +10,7 @@ import { SvgLogo, LogoSmall } from './components/logo';
 import Home from './views/home';
 import Contact from './views/Contact';
 import About from './views/About';
-import Releases from './views/Releases';
+import Music from './views/Music';
 import NoMatch from './views/NoMatch';
 import { Zoom, FadeZoom, MenuTranslate } from './animations';
 import '../styles/index.scss';
@@ -30,7 +30,7 @@ class App extends React.Component {
 	componentWillReceiveProps(nextProps) {
 	  if (nextProps.location !== this.props.location) {
 	  	switch (nextProps.location.pathname) {
-	  		case '/releases':
+	  		case '/music':
 	  				this.setState({showZoom: false});
 	  			break;
 	  		case '/about':
@@ -63,10 +63,10 @@ class App extends React.Component {
 	      {!this.state.intro &&
 	      	<LogoSmall/>
 				}
-				<Route path="/releases" render={ props => 
-	      	<Releases handleIntro={this.handleIntro.bind(this)} showOuter={this.state.showOuter} show={this.state.show} {...props}/> }
+				<Route path="/music" render={ props => 
+	      	<Music handleIntro={this.handleIntro.bind(this)} showOuter={this.state.showOuter} show={this.state.show} {...props}/> }
 	      />
-     		<div className="flex-center flex-container__row viewport-half" style={pathname === '/releases' ? {zIndex:-1}: {}}>
+     		<div className="flex-center flex-container__row viewport-half" style={pathname === '/music' ? {zIndex:-1}: {}}>
           <Zoom key="circle" onEntered={() => this.setState({showOuter:true})} mountOnEnter unmountOnExit in={this.state.showZoom}>
       			<div 
       				className="cs-circle darker" 
@@ -84,7 +84,7 @@ class App extends React.Component {
 			      <Route path="/about" render={ props => 
 			      	<About handleIntro={this.handleIntro.bind(this)}  showOuter={this.state.showOuter} show={this.state.show} {...props}/> }
 			      />
-						<Route path="/releases"/>
+						<Route path="/music"/>
 			      <Route render={ props => 
 			      	<NoMatch handleIntro={this.handleIntro.bind(this)}  showOuter={this.state.showOuter} show={this.state.show} {...props}/> }
 			      />
@@ -113,7 +113,7 @@ const Menu = (props) => {
 	return ( 
 		<ul className={`nav ${props.className}`}>
     	<li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
-    	<li><NavLink to="/releases" activeClassName="active">Releases</NavLink></li>
+    	<li><NavLink to="/music" activeClassName="active">Music</NavLink></li>
     	<li><NavLink to="/about" activeClassName="active">About</NavLink></li>
     	<li><NavLink to="/contact" activeClassName="active">Contact</NavLink></li>
   	</ul>
