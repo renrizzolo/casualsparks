@@ -1,29 +1,36 @@
 import React from 'react';
 import { Fade } from '../../animations/';
+import releases from './releases.json';
+import {
+  Route,
+  Link
+} from 'react-router-dom'
+
 
 //these could be json files that can be edited directly on gitHub
-const releases = [
-	{
-		'name': 'Every Time EP',
-		'artist': 'Ren Riz',
-		'imgSource': './img/covers/every-time-ep.jpg',
-		'previewHTML': '<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/44054952&amp;color=%23168dec&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false&amp;visual=true"></iframe>'
-		,'links': [
-			{
-				name: 'iTunes',
-				url: 'https://itunes.apple.com/au/album/every-time-ep/id892096132',
-			},
-			{
-				name: 'Spotify',
-				url: 'https://open.spotify.com/album/2UlNv3QKvo5xSHwCxtiuPj',
-			},
-			{
-				name: 'beatport',
-				url: 'https://www.beatport.com/release/every-time-ep/1331503',
-			}
-		]
-	},
-];
+// const releases = [
+// 	{
+// 		name: 'Every Time EP',
+// 		artist: 'Ren Riz',
+// 		id:'CSM001',
+// 		imgSource: './img/covers/every-time-ep.jpg',
+// 		previewHTML: '<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/44054952&amp;color=%23168dec&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false&amp;visual=true"></iframe>'
+// 		,links: [
+// 			{
+// 				name: 'iTunes',
+// 				url: 'https://itunes.apple.com/au/album/every-time-ep/id892096132',
+// 			},
+// 			{
+// 				name: 'Spotify',
+// 				url: 'https://open.spotify.com/album/2UlNv3QKvo5xSHwCxtiuPj',
+// 			},
+// 			{
+// 				name: 'beatport',
+// 				url: 'https://www.beatport.com/release/every-time-ep/1331503',
+// 			}
+// 		]
+// 	},
+// ];
 
 const mixes = [
 	{
@@ -62,7 +69,7 @@ const freebies = [
 	{
 		'name': 'Marmalade',
 		'artist': 'Ren Riz',
-		'imgSource': './img/covers/marmalade.jpg',
+		'imgSource': 'marmalade.jpg',
 		'previewHTML': '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/226389239&amp;color=%230066cc&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false"></iframe>',				
 	},
 ];
@@ -75,12 +82,19 @@ const Music = (props) => {
 	return (
   <Fade key="circle-menu" mountOnEnter unmountOnExit onEntered={props.handleIntro} in={!props.show || props.showOuter}>
   	<div className="background-cover background-cover__blue">
-   		<main className="full-page-container flex-container__column">
+    	<Route exact path={`${props.match.url}`} component={Grid}/>
+  	</div>
+	</Fade>
+	);
+}
+const Grid = (props) => {
+		return (
+	   		<main className="full-page-container flex-container__column">
 				<section className="item-grid">
 					<h1 className="heading item-grid__heading"><span className="dark-blue-bkg">Releases</span></h1>
 						{	releases.map((release) => (
 								<Item
-									key={release.name}
+									key={release.id}
 									data={release}
 								/>
 							))
@@ -106,22 +120,21 @@ const Music = (props) => {
 							))
 						}
 					</section>
-			</main>	  
-  	</div>
-	</Fade>
-	);
+			</main>	
+			);
 }
-
 const Item = (props) => {
 	const { data } = props;
-
 	return (
 			<div className="item">
 				<header>
-					{data.imgSource && <img src={require(`${data.imgSource}`)}/>}
+					{data.imgSource && <img src={require(`./img/covers/${data.imgSource}`)}/>}
 					<div className="item-info">
 						<h1>{data.artist}</h1>
-						<h2>{data.name}</h2>
+					{data.id ? <Link to={`/release/${data.id}`}><h2>{data.name}</h2></Link>
+					:
+					<h2>{data.name}</h2>
+				}
 						<div className="link-container">
 							{data.links && data.links.map((link) => (
 								<a key={link.name} target="_blank" rel="noopener" className="button light-blue shop-link" href={link.url}>{link.name}</a>

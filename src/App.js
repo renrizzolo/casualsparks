@@ -11,6 +11,8 @@ import Home from './views/home';
 import Contact from './views/Contact';
 import About from './views/About';
 import Music from './views/Music';
+import Release from './views/music/Release';
+
 import NoMatch from './views/NoMatch';
 import { Zoom, FadeZoom, MenuTranslate } from './animations';
 import '../styles/index.scss';
@@ -66,7 +68,9 @@ class App extends React.Component {
 				<Route path="/music" render={ props => 
 	      	<Music handleIntro={this.handleIntro.bind(this)} showOuter={this.state.showOuter} show={this.state.show} {...props}/> }
 	      />
-     		<div className="flex-center flex-container__row viewport-half" style={pathname === '/music' ? {zIndex:-1}: {}}>
+	      <Route path="/release/:id" component={Release}/>
+
+     		<div className="flex-center flex-container__row viewport-half">
           <Zoom key="circle" onEntered={() => this.setState({showOuter:true})} mountOnEnter unmountOnExit in={this.state.showZoom}>
       			<div 
       				className="cs-circle darker" 
@@ -84,7 +88,8 @@ class App extends React.Component {
 			      <Route path="/about" render={ props => 
 			      	<About handleIntro={this.handleIntro.bind(this)}  showOuter={this.state.showOuter} show={this.state.show} {...props}/> }
 			      />
-						<Route path="/music"/>
+			      <Route path="/music"/>
+			      <Route path="/release"/>
 			      <Route render={ props => 
 			      	<NoMatch handleIntro={this.handleIntro.bind(this)}  showOuter={this.state.showOuter} show={this.state.show} {...props}/> }
 			      />

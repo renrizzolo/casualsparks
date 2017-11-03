@@ -18,6 +18,21 @@ body {
   box-sizing: border-box;
   overflow-y: hidden;
 }
+a{
+	text-decoration: none;
+	color: $cs-darkblue;
+	transition: color 200ms ease;
+	text-decoration: underline;
+	&:hover{
+		color: $cs-lightblue;
+	}
+}
+.background-cover__blue a{
+	color: $lightpearl;
+		&:hover{
+		color: $cs-lightblue;
+	}
+}
 img{
 	width: 100%;
   height: auto;
@@ -111,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
 	}
 }
 .nav {
-	z-index: 1;
+		z-index: 2;
 		display: flex;
     flex-direction: row;
     margin: 0;
@@ -120,6 +135,7 @@ h1, h2, h3, h4, h5, h6 {
     &.desktop{
     		position: absolute;
 				right: 0;
+				top:0;
 	    	&.music {
 	    	background-color: rgba(11, 42, 68, 0.67);
 	    		li a {
@@ -245,14 +261,27 @@ h1, h2, h3, h4, h5, h6 {
 	left:0;
 	right:0;
 	overflow: scroll;
+	z-index: 1;
 	&.background-cover__blue{
 		background-color: $cs-darkblue;
 		color: $lightpearl;
+	}
+	&.background-cover__pearl{
+		color: $cs-darkblue;
+		background-color: $lightpearl;
 	}
 }
 .dark-blue-bkg{
 	background: $cs-darkblue;
 }
+.pearl-bkg{
+	background: $lightpearl;
+}
+	.single-release{
+		max-width: 700px;
+		margin: 0 auto;
+		text-align: center;
+	}
 .item-grid{
 	display: grid;
 	grid-template-rows: auto;
@@ -270,6 +299,9 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.5;
 		z-index: 0;
 		border: none;
+		&.item-grid__heading-dark-blue{
+			color: $cs-darkblue;
+		}
     span {
       padding: 0 1rem;
     }
@@ -313,10 +345,10 @@ h1, h2, h3, h4, h5, h6 {
 
 	.item{
 		width: 100%;
-		//border-bottom: 2px solid $cs-lightblue;
-   // padding-bottom: 2rem;
-   padding: 2rem;
-   background-color: darken($cs-darkblue, 3%);
+		//border-bottom: 4px solid $cs-lightblue;
+	  padding: 2rem;
+	  background-color: darken($cs-darkblue, 1%);
+	 box-shadow: 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
     .track-list{
     	h2 {
     		cursor: pointer;

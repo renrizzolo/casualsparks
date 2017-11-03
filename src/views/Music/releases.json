@@ -1,0 +1,23 @@
+[
+	{
+		"name": "Every Time EP",
+		"artist": "Ren Riz",
+		"id":"CSM001",
+		"imgSource": "every-time-ep.jpg",
+		"previewHTML": "<iframe width='100%' height='300' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/44054952&amp;color=%23168dec&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false&amp;visual=true'></iframe>",
+		"links": [
+			{
+				"name": "iTunes",
+				"url": "https://itunes.apple.com/au/album/every-time-ep/id892096132"
+			},
+			{
+				"name": "Spotify",
+				"url": "https://open.spotify.com/album/2UlNv3QKvo5xSHwCxtiuPj"
+			},
+			{
+				"name": "beatport",
+				"url": "https://www.beatport.com/release/every-time-ep/1331503"
+			}
+		]
+	}
+]
