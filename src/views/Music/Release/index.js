@@ -16,7 +16,8 @@ const Release = (props) => {
  	   		<main className="full-page-container flex-container__column">
 				<section className="single-release">
 				{	releases.map((release) => (
-								release.id === props.match.params.id ? <Item
+								release.id === props.match.params.id ? 
+								<ReleaseItem
 									key={release.id}
 									data={release}
 								/>
@@ -33,28 +34,13 @@ const Release = (props) => {
 	);
 }
 
-const Item = (props) => {
+const ReleaseItem = (props) => {
 	const { data } = props;
 
 	return (
 			<div className="item">
 				<header>
-					{data.imgSource && <img src={require(`../img/covers/${data.imgSource}`)}/>}
-					<div className="item-info">
-						<h1>{data.artist}</h1>
-						<h2>{data.name}</h2>
-						<div className="link-container">
-							{data.links && data.links.map((link) => (
-								<a key={link.name} target="_blank" rel="noopener" className="button light-blue shop-link" href={link.url}>{link.name}</a>
-							))
-							}
-						</div>
-					</div>
-				</header>
-				{data.previewHTML &&
-					<div dangerouslySetInnerHTML={{ __html: data.previewHTML }} />
-				}
-				{data.trackList &&
+								{data.trackList &&
 					<aside>
 						<div className="track-list">
 							<h2 onMouseUp={(e) => {expandList(e)}}>Track list <span></span></h2>
@@ -67,6 +53,25 @@ const Item = (props) => {
 						</div>
 					</aside>
 				}
+					<div className="item-info">
+						<h1>{data.artist}</h1>
+						<h2>{data.name}</h2>
+						<div className="link-container">
+							{data.links && data.links.map((link) => (
+								<a key={link.name} target="_blank" rel="noopener" className="button light-blue shop-link" href={link.url}>{link.name}</a>
+							))
+							}
+						</div>
+					</div>
+					{data.imgSource && <img src={require(`../img/covers/${data.imgSource}`)}/>}
+				</header>
+				{data.description &&
+					<p className="description">{data.description}</p>
+				}
+				{data.previewHTML &&
+					<div dangerouslySetInnerHTML={{ __html: data.previewHTML }} />
+				}
+
 			</div>
 	)
 }

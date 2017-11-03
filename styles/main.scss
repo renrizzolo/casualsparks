@@ -277,11 +277,15 @@ h1, h2, h3, h4, h5, h6 {
 .pearl-bkg{
 	background: $lightpearl;
 }
-	.single-release{
-		max-width: 700px;
-		margin: 0 auto;
-		text-align: center;
-	}
+.single-release{
+	max-width: 500px;
+	margin: 0 auto;
+}
+.description{
+  white-space: pre-line;
+  font-size: 1.12rem;
+  line-height: 1.475;
+}
 .item-grid{
 	display: grid;
 	grid-template-rows: auto;
