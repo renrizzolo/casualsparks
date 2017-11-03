@@ -56,7 +56,7 @@ module.exports = {
       minify: true,
       mergeStaticsConfig: true,
       navigateFallback: ROOT_URL + 'index.html',
-    debug:true,
+      debug:true,
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
     new WebpackCleanupPlugin({exclude: [SERVICE_WORKER_NAME]}),

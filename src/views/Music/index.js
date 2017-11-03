@@ -7,8 +7,8 @@ const releases = [
 		'name': 'Every Time EP',
 		'artist': 'Ren Riz',
 		'imgSource': './img/covers/every-time-ep.jpg',
-		'previewHTML': '<iframe width="100%" height="450" scrolling="no" frameBorder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/44054952&amp;color=%23168dec&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false"></iframe>',
-		'links': [
+		'previewHTML': '<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/44054952&amp;color=%23168dec&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false&amp;visual=true"></iframe>'
+		,'links': [
 			{
 				name: 'iTunes',
 				url: 'https://itunes.apple.com/au/album/every-time-ep/id892096132',
@@ -77,7 +77,7 @@ const Music = (props) => {
   	<div className="background-cover background-cover__blue">
    		<main className="full-page-container flex-container__column">
 				<section className="item-grid">
-					<h1 className="heading item-grid__heading">Releases</h1>
+					<h1 className="heading item-grid__heading"><span className="dark-blue-bkg">Releases</span></h1>
 						{	releases.map((release) => (
 								<Item
 									key={release.name}
@@ -87,7 +87,7 @@ const Music = (props) => {
 						}
 					</section>
 						<section className="item-grid">
-						<h1 className="heading item-grid__heading">Freebies</h1>
+						<h1 className="heading item-grid__heading"><span className="dark-blue-bkg">Freebies</span></h1>
 								{	freebies.map((freebie) => (
 								<Item
 									key={freebie.name}
@@ -97,7 +97,7 @@ const Music = (props) => {
 						}
 					</section>
 					<section className="item-grid">
-						<h1 className="heading item-grid__heading">Mixes</h1>
+						<h1 className="heading item-grid__heading"><span className="dark-blue-bkg">Mixes</span></h1>
 							{	mixes.map((mix) => (
 								<Item
 									key={mix.name}
