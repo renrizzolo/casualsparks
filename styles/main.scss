@@ -51,14 +51,36 @@ h1, h2, h3, h4, h5, h6 {
 	text-rendering: optimizeLegibility;
 	font-family: $font-serif;
 }
+h1 {
+	font-size: 2.5em;
+}
+h2{
+	font-size: 1.5em;
+}
+h3{
+	font-size: 1.2em;
+}
+h1 {
+	&.heading{
+		border-bottom: 8px solid;
+  	font-size: 4em;
+	}
+}
+h2{
+	&.heading{
+		border-bottom: 4px solid;
+    font-size: 2em;
+	}
+}
 .heading {
 	color: $lightpearl;
 	margin-bottom: 0.25em;
-	border-bottom: 8px solid $lightpearl;
-  font-size: 4em;
   @media screen and (max-width:420px) {
   	font-size: 2em;	
   }
+}
+.heading-dark{
+	color: $cs-darkblue;
 }
 .circle-text{
   position: absolute;
@@ -137,7 +159,6 @@ h1, h2, h3, h4, h5, h6 {
 				right: 0;
 				top:0;
 	    	&.music {
-	    	background-color: rgba(11, 42, 68, 0.67);
 	    		li a {
 		    	color: $lightpearl;
 		    }
@@ -352,7 +373,13 @@ h1, h2, h3, h4, h5, h6 {
 		//border-bottom: 4px solid $cs-lightblue;
 	  padding: 2rem;
 	  background-color: darken($cs-darkblue, 1%);
-	 box-shadow: 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
+		box-shadow: 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
+		transition: all 250ms ease;
+		&:hover{
+			transform: translate(2px, 2px);
+			box-shadow: 0 5px 15px 0 rgba(0,0,0,.11), 0 15px 30px 0 rgba(0,0,0,.08);
+
+		}
     .track-list{
     	h2 {
     		cursor: pointer;
@@ -415,8 +442,10 @@ h1, h2, h3, h4, h5, h6 {
 			font-family: $font-sans;
 			font-size: 2rem;
 			margin-top: 0;
+			margin-bottom: 0.55rem;
 		}
 		h2{
+			margin-top: 0;
 			font-family: $font-sans;
 			font-weight: 200;
 		}

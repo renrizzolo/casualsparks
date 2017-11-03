@@ -66,7 +66,10 @@ const ReleaseItem = (props) => {
 					{data.imgSource && <img src={require(`../img/covers/${data.imgSource}`)}/>}
 				</header>
 				{data.description &&
-					<p className="description">{data.description}</p>
+					<div>
+						<h2 class="heading heading-dark">Info</h2>
+						<p className="description">{data.description}</p>
+					</div>
 				}
 				{data.previewHTML &&
 					<div dangerouslySetInnerHTML={{ __html: data.previewHTML }} />
