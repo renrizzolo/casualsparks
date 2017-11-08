@@ -55,7 +55,7 @@ class App extends React.Component {
   	const { pathname } = this.props.location;
     return (
       <div>
-       <span className={`menu-button ${this.stripSlash(pathname)}`}>
+       <span className={ this.state.showMenu ? `menu-button open ${this.stripSlash(pathname)}` : `menu-button ${this.stripSlash(pathname)}`}>
        	<a onClick={() => this.setState({showMenu:!this.state.showMenu})}>{this.state.showMenu ? "close" : "menu"}</a>
        </span>
 				<MenuTranslate key="nav" mountOnEnter unmountOnExit in={this.state.showMenu}>

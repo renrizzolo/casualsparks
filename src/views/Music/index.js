@@ -4,7 +4,9 @@ import releases from './releases.json';
 import {
   Route,
   Link
-} from 'react-router-dom'
+} from 'react-router-dom';
+import '../../../styles/common/item-grid.scss';
+
 
 
 //these could be json files that can be edited directly on gitHub
@@ -69,11 +71,20 @@ const freebies = [
 	{
 		'name': 'Marmalade',
 		'artist': 'Ren Riz',
-		'imgSource': 'marmalade.jpg',
+		//'imgSource': 'marmalade.jpg',
 		'previewHTML': '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/226389239&amp;color=%230066cc&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false"></iframe>',				
 	},
+	{
+		'name': 'Through With You',
+		"artist": "Ren Riz",
+		"previewHTML": "<iframe width='100%' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/107452559&amp;color=%23168dec&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false'></iframe>",
+	},
+	{
+		'name': 'Call Me Up (ft. Vincent Coleman)',
+		"artist": "Ren Riz",
+		"previewHTML": "<iframe width='100%' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/181096805&amp;color=%23168dec&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false'></iframe>",
+	}
 ];
-
 function expandList(e) {
 	e.target.parentElement.classList.toggle('expanded');
 }
@@ -81,7 +92,10 @@ function expandList(e) {
 const Music = (props) => {
 	return (
   <Fade key="circle-menu" mountOnEnter unmountOnExit onEntered={props.handleIntro} in={!props.show || props.showOuter}>
-  	<div className="background-cover background-cover__blue">
+  	<div className="background-cover background-blue">
+  	  <div className="page-header">
+  	  	<h1 className="jumbo-heading">Music</h1>
+  	  </div>
     	<Route exact path={`${props.match.url}`} component={Grid}/>
   	</div>
 	</Fade>
@@ -126,15 +140,15 @@ const Grid = (props) => {
 const Item = (props) => {
 	const { data } = props;
 	return (
-			<div className="item">
+			<div className="item background-pearl">
 				<header>
-					{data.imgSource && <img src={require(`./img/covers/${data.imgSource}`)}/>}
+					{/*data.imgSource && <img src={require(`./img/covers/${data.imgSource}`)}/>*/}
 					<div className="item-info">
-						<h1>{data.artist}</h1>
-					{data.id ? <Link to={`/release/${data.id}`}><h2>{data.name}</h2></Link>
-					:
-					<h2>{data.name}</h2>
-				}
+						<h1 className="item-heading">{data.artist}</h1>
+					{data.id ? <Link to={`/release/${data.id}`}><h2 className="item-sub-heading">{data.name}</h2></Link>
+						:
+						<h2 className="item-sub-heading">{data.name}</h2>
+					}
 						<div className="link-container">
 							{data.links && data.links.map((link) => (
 								<a key={link.name} target="_blank" rel="noopener" className="button light-blue shop-link" href={link.url}>{link.name}</a>

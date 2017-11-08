@@ -10,52 +10,54 @@ function expandList(e) {
 }
 
 const Release = (props) => {
-	console.log(props);
+	const release = releases.find(release => release.id === props.match.params.id );
+
+	console.log(release);
 	return (
-		 <div className="background-cover background-cover__pearl">
+		 <div className="background-cover background-pearl">
+		   	<div className="page-header flex-container">
+			 
+			   	{release ? 
+				   	<div className="flex-3">
+							<h2>{release.artist}</h2>
+				   		<h1>{release.name}</h1>
+				   	</div>
+			   		:
+				   	<div>
+				   		<h2>Somebody</h2>
+				   		<h1>Something</h1>
+				   	</div>
+			   	}
+				   	<div className="flex-1 release-cover__container">
+				   		{release && release.imgSource && <img src={require(`../img/covers/${release.imgSource}`)}/>}
+				   	</div>
+			   	</div>
+
  	   		<main className="full-page-container flex-container__column">
-				<section className="single-release">
-				{	releases.map((release) => (
-								release.id === props.match.params.id ? 
-								<ReleaseItem
-									key={release.id}
-									data={release}
-								/>
-								:
-								<div>
-									<h1>Sorry, you've followed the wrong path</h1>
-									<Link to="/">Back to reality</Link>
-								</div>						
-							))
-						}
+					<section className="single-release">
+					{	release ? 
+						<ReleaseItem
+							key={release.id}
+							data={release}
+						/>
+						:
+						<div>
+							<h1>Sorry, you've followed the wrong path</h1>
+							<Link to="/">Back to reality</Link>
+						</div>
+					}
 					</section>
-			</main>	
+				</main>	
 			</div>  
 	);
 }
 
 const ReleaseItem = (props) => {
 	const { data } = props;
-
 	return (
 			<div className="item">
 				<header>
-								{data.trackList &&
-					<aside>
-						<div className="track-list">
-							<h2 onMouseUp={(e) => {expandList(e)}}>Track list <span></span></h2>
-							<ol>
-						{	data.trackList.map((track, i) => (
-								<li key={i}>{track}</li>
-								))
-						}
-							</ol>
-						</div>
-					</aside>
-				}
 					<div className="item-info">
-						<h1>{data.artist}</h1>
-						<h2>{data.name}</h2>
 						<div className="link-container">
 							{data.links && data.links.map((link) => (
 								<a key={link.name} target="_blank" rel="noopener" className="button light-blue shop-link" href={link.url}>{link.name}</a>
@@ -63,16 +65,31 @@ const ReleaseItem = (props) => {
 							}
 						</div>
 					</div>
-					{data.imgSource && <img src={require(`../img/covers/${data.imgSource}`)}/>}
 				</header>
 				{data.description &&
 					<div>
-						<h2 class="heading heading-dark">Info</h2>
+						<h2 className="heading heading-dark">Info</h2>
 						<p className="description">{data.description}</p>
 					</div>
 				}
+				{ data.trackList &&
+				<aside>
+					<div className="track-list">
+						<h2 onMouseUp={(e) => {expandList(e)}}>Track list <span></span></h2>
+						<ol>
+					{	data.trackList.map((track, i) => (
+							<li key={i}>{track}</li>
+							))
+					}
+						</ol>
+					</div>
+				</aside>
+				}
 				{data.previewHTML &&
-					<div dangerouslySetInnerHTML={{ __html: data.previewHTML }} />
+					<div>
+						<h2 className="heading heading-dark">Preview</h2>
+						<div dangerouslySetInnerHTML={{ __html: data.previewHTML }} />
+					</div>
 				}
 
 			</div>
