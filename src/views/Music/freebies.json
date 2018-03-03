@@ -1,0 +1,17 @@
+[
+	{
+		"name": "Marmalade",
+		"artist": "Ren Riz",
+		"previewHTML": "<iframe width='100%' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/226389239&amp;color=%230066cc&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false'></iframe>"			
+	},
+	{
+		"name": "Through With You",
+		"artist": "Ren Riz",
+		"previewHTML": "<iframe width='100%' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/107452559&amp;color=%23168dec&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false'></iframe>"
+	},
+	{
+		"name": "Call Me Up (ft. Vincent Coleman)",
+		"artist": "Ren Riz",
+		"previewHTML": "<iframe width='100%' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/181096805&amp;color=%23168dec&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false'></iframe>"
+	}
+]
