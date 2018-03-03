@@ -1244,6 +1244,7 @@ h2.heading {
     -webkit-flex-direction: column;
         -ms-flex-direction: column;
             flex-direction: column;
+    padding-left: 1.5rem;
   }
 }
 
