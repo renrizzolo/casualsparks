@@ -1817,8 +1817,13 @@ h2.heading {
   color: #EEEBE9;
 }
 
-.social-link img {
-  width: 1.75em;
+.social-link:hover svg {
+  fill: #EEEBE9;
+}
+
+.social-link img, .social-link svg {
+  fill: #ffffff;
+  width: 2em;
   padding-right: 0.75em;
 }
 
