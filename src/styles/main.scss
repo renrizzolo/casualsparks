@@ -807,9 +807,13 @@ $button-horizontal-padding: 0.75em;
   margin-bottom: 0.75em;
 		&:hover{
 			color: $lightpearl;
+			svg {
+				fill: $lightpearl;
+			}
 		}
-		img{
-			width: 1.75em;
+		img, svg{
+			fill: #ffffff;
+			width: 2em;
 			padding-right: 0.75em;
 		}
 }

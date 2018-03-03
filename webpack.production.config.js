@@ -59,7 +59,7 @@ module.exports = {
       debug:true,
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
-    new WebpackCleanupPlugin({exclude: [SERVICE_WORKER_NAME]}),
+    new WebpackCleanupPlugin({exclude: [SERVICE_WORKER_NAME, 'CNAME']}),
 
     new webpack.optimize.UglifyJsPlugin({
       compress: {

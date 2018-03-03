@@ -37,11 +37,11 @@ module.exports = [
   {
     test: /\.jpg/,
     exclude: /(node_modules|bower_components)/,
-    loader: "file-loader"
+    loader: "url-loader?limit=10000&mimetype=image/jpg"
   },
   {
     test: /\.png/,
     exclude: /(node_modules|bower_components)/,
-    loader: "file-loader"
+    loader: "url-loader?limit=10000&mimetype=image/png"
   }
 ];
