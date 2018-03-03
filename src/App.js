@@ -89,7 +89,7 @@ class App extends React.Component {
 			      	<About handleIntro={this.handleIntro.bind(this)}  showOuter={this.state.showOuter} show={this.state.show} {...props}/> }
 			      />
 			      <Route path="/music"/>
-			      <Route path="/release"/>
+			      <Route path="/release/:id"/>
 			      <Route render={ props => 
 			      	<NoMatch handleIntro={this.handleIntro.bind(this)}  showOuter={this.state.showOuter} show={this.state.show} {...props}/> }
 			      />

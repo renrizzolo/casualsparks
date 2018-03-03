@@ -7,7 +7,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const SERVICE_WORKER_NAME = 'service-worker.js';
-const PRECACHE_ID = 'cs-react-v1';
+const PRECACHE_ID = 'cs-react-v1-1';
 const ROOT_URL = 'https://casualsparks.com/';
 
 loaders.push({
@@ -27,7 +27,7 @@ module.exports = {
     main: path.resolve(__dirname, 'src'),
   },
   output: {
-    publicPath: './',		
+    publicPath: '',		
     path: path.join(__dirname, 'public'),
     filename: '[chunkhash].js'
   },
