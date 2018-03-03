@@ -9,7 +9,7 @@ var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const SERVICE_WORKER_NAME = 'service-worker.js';
 const PRECACHE_ID = 'cs-react-v1-1';
 const ROOT_URL = 'https://casualsparks.com/';
-
+const FAVICON = 'Casual-Sparks-light-blue-32.png';
 loaders.push({
   test: /\.scss$/,
   loader: ExtractTextPlugin.extract({
@@ -59,7 +59,7 @@ module.exports = {
       debug:true,
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
-    new WebpackCleanupPlugin({exclude: [SERVICE_WORKER_NAME, 'CNAME']}),
+    new WebpackCleanupPlugin({exclude: [SERVICE_WORKER_NAME, 'CNAME', FAVICON]}),
 
     new webpack.optimize.UglifyJsPlugin({
       compress: {
