@@ -83,12 +83,16 @@ h2{
 	color: $cs-darkblue;
 }
 .circle-text{
-  position: absolute;
-  margin: 0;
-  padding: 0 80px;
-  color: white;
-  z-index: 1;
-
+  	position: absolute;
+  	margin: 0;
+  	@media screen and (min-height: 415px){
+  		padding: 0 80px;
+  		font-size: 0.75em;
+  	}
+	padding: 0 30px;
+	
+  	color: white;
+  	z-index: 1;
 }
 .full-page-container{
   padding: 3em;
@@ -160,9 +164,13 @@ h2{
 		}
 		&.music a {
 	    	color: $lightpearl;
+
 	    }
+	    &.music:not(.open) a {
+				background-color: $page-header-blue;
+		    }
 		a{
-			line-height: 2em;
+		line-height: 2em;
 	    padding: 0.33rem 2rem;
 	    margin: 0;
 	    color: $cs-darkblue;
@@ -172,15 +180,28 @@ h2{
 	    transition: all 0.5s ease;
 	  }
   @include maxwidth(s) {
-		cursor: pointer;
-		display: flex;
-		flex:1;
+	cursor: pointer;
+	display: flex;
+	flex:1;
     position: absolute;
     right: 0;
     top: 0;
-    a{
-    	padding: 0.33rem 1rem;
-    }
+	    a{
+	    	padding: 0.5rem 1rem;
+	    	line-height: 1.5rem;
+	    }
+	}
+	@media screen and (max-height: 415px){
+		cursor: pointer;
+	display: flex;
+	flex:1;
+    position: absolute;
+    right: 0;
+    top: 0;
+	    a{
+	    	padding: 0.5rem 1rem;
+	    	line-height: 1.5rem;
+	    }	
 	}
 }
 
@@ -193,18 +214,20 @@ h2{
 \*------------------------------------*/
 
 .nav {
-		font-family: $font-serif;
-		z-index: 2;
-		display: flex;
-    flex-direction: row;
+	font-family: $font-serif;
+	text-align: right;
+	z-index: 2;
+	display: flex;
+    flex-direction: column;
     margin: 0;
-    padding: 0 2rem;
+    padding: 0 1rem;
     justify-content: flex-end;
     &.desktop{
     		position: absolute;
 				right: 0;
 				top:0;
 	    	&.music {
+	    		background-color: $page-header-blue;
 	    		li a {
 		    	color: $lightpearl;
 		    }
@@ -222,7 +245,7 @@ h2{
     	background-color: #168dec;
     	box-shadow: 0px 0px 245px rgba(9, 9, 9, 0.36);
     	border-right: 15px solid #abd2f1;
-    	@media screen and (min-width: 768px ){
+    	@media screen and (min-width: 824px ){
     		display: none;
     	}
     	 @media screen and (max-height: 420px ){
@@ -231,16 +254,15 @@ h2{
     }
 
 	li{
-		  list-style: none;
-
+		list-style: none;
 		a{
-			line-height: 3em;
-	    margin: 0.33rem 1rem;
-	    color: $cs-darkblue;
+			line-height: 2.5em;
+		    margin: 0.33rem 1rem;
+		    color: $cs-darkblue;
 			position: relative;
-	    font-size: 2em;
-   		font-weight: 600;
-	    text-decoration: none;
+		    font-size: 2em;
+	   		font-weight: 600;
+		    text-decoration: none;
 			&.active{
 				&:before{
 					opacity:1;
@@ -331,14 +353,14 @@ h2{
 	background-color: $cs-darkblue;
 	color: $lightpearl;
 	.page-header{
-		background-color: lighten($cs-darkblue, 7%);
+		background-color: $page-header-blue;
 	}
 }
 .background-pearl{
 	color: $cs-darkblue;
 	background-color: $lightpearl;
 	.page-header{
-		background-color: darken($lightpearl, 7%);
+		background-color: $page-header-pearl;
 	}
 }
 .dark-blue-bkg{
@@ -371,7 +393,7 @@ h2{
 	display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  margin-right: 3rem;
+  margin-right: 12rem;
   img{
   	max-width: 500px;
   }
@@ -414,9 +436,9 @@ $button-horizontal-padding: 0.75em;
 }
 
 .viewport-half{
-  width: 45vw;
+  width: $circle-width;
   height: 100vh;
-  margin-left: 45vw;
+  margin-left: $circle-left;
 	position: relative;
 
 }
@@ -474,6 +496,10 @@ $button-horizontal-padding: 0.75em;
 }
 
 
+/*------------------------------------*\
+	#HEADINGS 
+\*------------------------------------*/
+
 .page-header {
   margin-top: 0;
   padding-left: 3rem;
@@ -487,7 +513,7 @@ $button-horizontal-padding: 0.75em;
   	font-weight: 100;
     margin-top: 0;
     margin-bottom: 0.5em;
-  	font-size: 8em;
+  	font-size: 6em;
   	@include maxwidth(s) {
 			font-size: 3.5em;
   	}
@@ -733,7 +759,6 @@ $button-horizontal-padding: 0.75em;
 	fill: none;
 }
 .blue-circle{
-	//fill: darken($cs-lightblue, 5);
 	fill: $cs-lightblue;
 }
 .stroke-2{
@@ -764,7 +789,7 @@ $button-horizontal-padding: 0.75em;
 	left: 0;
 	top: 0;
 	z-index:2;
-	margin: 1rem 3rem;
+	margin: 1em 3em;
 	position: absolute;
 	display: flex;
 	animation: logo-in 1s ease forwards;
@@ -815,16 +840,13 @@ $button-horizontal-padding: 0.75em;
 		border-radius: 0;
 	}
 	.logo-small{
-    margin: 1rem;
+    margin: 0.5rem;
     .logo-small__svg{
-			width: 75px;
+			width: 50px;
 		}
 	}
 	.logo__svg{
 		width: 100vw;
-	}
-	.circle-text{
-		padding: 0 30px;
 	}
 	.blue-circle{
 		fill: $cs-darkblue;

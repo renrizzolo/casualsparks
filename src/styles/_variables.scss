@@ -2,6 +2,11 @@
 $lightpearl: #EEEBE9;
 $cs-lightblue: #168dec;
 $cs-darkblue: #0b2a44;
+$page-header-blue: lighten($cs-darkblue, 7%);
+$page-header-pearl: darken($lightpearl, 7%);
 $secondary: #ea444e;
+
+$circle-width: 45vw;
+$circle-left: 10vw;
 $font-sans: "Helvetica Neue", Helvetica, sans-serif;
 $font-serif: 'Rozha One', Georgia, serif;
