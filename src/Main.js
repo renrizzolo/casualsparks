@@ -8,7 +8,7 @@ import {
 import { withRouter } from 'react-router';
 import { SvgLogo, LogoSmall } from 'components/logo';
 //import { Home, About, Contact } from 'views';
-import '../styles/index.scss';
+import './styles/index.scss';
 
 class Mainz extends React.Component {
 	constructor(props, context) {

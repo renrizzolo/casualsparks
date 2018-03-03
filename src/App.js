@@ -15,7 +15,7 @@ import Release from './views/music/Release';
 
 import NoMatch from './views/NoMatch';
 import { Zoom, FadeZoom, MenuTranslate } from './animations';
-import '../styles/index.scss';
+import './styles/index.scss';
 
 class App extends React.Component {
 	constructor(props, context) {
@@ -116,7 +116,7 @@ export default withRouter(App);
 
 const Menu = (props) => {
 	return ( 
-		<ul className={`nav ${props.className}`}>
+		<ul role="navigation" aria-label="Primary" className={`nav ${props.className}`}>
     	<li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
     	<li><NavLink to="/music" activeClassName="active">Music</NavLink></li>
     	<li><NavLink to="/about" activeClassName="active">About</NavLink></li>

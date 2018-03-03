@@ -50,7 +50,6 @@
     "jest": "^20.0.4",
     "loglevel": "^1.4.1",
     "postcss-loader": "^1.2.2",
-    "react-addons-test-utils": "16.0.0-beta.3",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-test-renderer": "^16.0.0",
     "style-loader": "0.13.1",
