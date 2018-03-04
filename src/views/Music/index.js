@@ -62,7 +62,7 @@ const Grid = (props) => {
 			);
 }
 
-const isOnline = () => process.env === 'production' &&  window.navigator.onLine;
+const isOnline = () => window.navigator.onLine;
 
 const Item = (props) => {
 	const { data } = props;
