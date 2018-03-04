@@ -8,7 +8,7 @@ import {
 export default class AppWrapper extends React.Component {
   render() {
     return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
     	<App/>
     </Router>
     )

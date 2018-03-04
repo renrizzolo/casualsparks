@@ -50,7 +50,12 @@ module.exports = {
         js: ['bundle.js'],
       }
     }),
-      new SWPrecacheWebpackPlugin({
+    new HtmlWebpackPlugin({
+      filename: '404.html',
+      template: './src/404.html'
+    }),
+
+    new SWPrecacheWebpackPlugin({
       cacheId: PRECACHE_ID,
       filename: SERVICE_WORKER_NAME,
       minify: true,
