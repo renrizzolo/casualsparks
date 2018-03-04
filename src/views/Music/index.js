@@ -61,6 +61,9 @@ const Grid = (props) => {
 			</main>	
 			);
 }
+
+const isOnline = () => window.navigator.onLine;
+
 const Item = (props) => {
 	const { data } = props;
 	return (
@@ -81,8 +84,14 @@ const Item = (props) => {
 						</div>
 					</div>
 				</header>
-				{data.previewHTML &&
+				{ isOnline() ?
+				(data.previewHTML &&
 					<div dangerouslySetInnerHTML={{ __html: data.previewHTML }} />
+				) :
+					<div className="error notice">
+						<h2 className="sans">Can't load stream :(</h2>
+						<small>Your connection has been lost. Please try again when you find it.</small>
+					</div>
 				}
 				{data.trackList &&
 					<aside>

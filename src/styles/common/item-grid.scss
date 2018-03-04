@@ -76,10 +76,12 @@
  	grid-template-columns: repeat(3, 1fr);
   grid-gap:2rem;
   margin-bottom: 5rem;
-
   	--item-spacing: 2rem;
 	@include maxwidth(s){
 		--item-spacing: 1.5rem;
+	}
+	@include maxwidth(xs){
+		--item-spacing: 1rem;
 	}
 	.link-container{
 		display: flex;

@@ -42,7 +42,7 @@ const Release = (props) => {
 						/>
 						:
 						<div>
-							<h1>Sorry, you've followed the wrong path</h1>
+							<h1>{`Sorry, you\'ve followed the wrong path`}</h1>
 							<Link to="/">Back to reality</Link>
 						</div>
 					}

@@ -5,7 +5,7 @@ import { SvgLogo } from '../../components/logo';
 const Home = (props) => {
 	return (
 		<Fade key="circle-text" mountOnEnter unmountOnExit onEntered={props.handleIntro} in={props.showOuter}>
-     	<div className="circle-text flex-center flex-container__column">
+     	<div className="circle-text circle-text__home flex-center flex-container__column">
     		<SvgLogo/>
     	</div>
   	</Fade>
