@@ -1,15 +1,17 @@
-var webpack = require('webpack');
-var path = require('path');
-var loaders = require('./webpack.loaders');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const loaders = require('./webpack.loaders');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const SERVICE_WORKER_NAME = 'service-worker.js';
 const PRECACHE_ID = 'cs-react-v1-1';
 const ROOT_URL = 'https://casualsparks.com/';
 const FAVICON = 'Casual-Sparks-light-blue-32.png';
+
 loaders.push({
   test: /\.scss$/,
   loader: ExtractTextPlugin.extract({
@@ -38,9 +40,9 @@ module.exports = {
     loaders
   },
   plugins: [
-      new webpack.DefinePlugin({
+    new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"production"'
+        NODE_ENV: JSON.stringify("production"),
       }
     }),
     new HtmlWebpackPlugin({
@@ -52,7 +54,9 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: '404.html',
-      template: './src/404.html'
+      template: './src/404.html',
+      excludeChunks: ["main"],
+
     }),
 
     new SWPrecacheWebpackPlugin({
@@ -79,6 +83,6 @@ module.exports = {
       filename: 'style.css',
       allChunks: true
     }),
-
+    new CompressionPlugin(),
   ]
 };
