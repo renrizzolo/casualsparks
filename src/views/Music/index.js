@@ -9,22 +9,21 @@ import {
 } from 'react-router-dom';
 import '../../styles/common/item-grid.scss';
 
-function expandList(e) {
-	e.target.parentElement.classList.toggle('expanded');
-}
+import { ToggleClass, WatchConnection, OfflineError } from '../../components';
 
 const Music = (props) => {
 	return (
-  <Fade key="circle-menu" mountOnEnter unmountOnExit onEntered={props.handleIntro} in={!props.show || props.showOuter}>
-  	<div className="background-cover background-blue">
-  	  <div className="page-header">
-  	  	<h1 className="jumbo-heading">Music</h1>
-  	  </div>
-    	<Route exact path={`${props.match.url}`} component={Grid}/>
-  	</div>
-	</Fade>
+  		<Fade key="circle-menu" mountOnEnter unmountOnExit onEntered={props.handleIntro} in={!props.show || props.showOuter}>
+  			<div className="background-cover background-blue">
+	  	  		<div className="page-header">
+	  	  			<h1 className="jumbo-heading">Music</h1>
+	  	  		</div>
+    			<Route exact path={`${props.match.url}`} component={Grid}/>
+  			</div>
+		</Fade>
 	);
 }
+
 const Grid = (props) => {
 		return (
 	   		<main className="full-page-container flex-container__column">
@@ -62,14 +61,12 @@ const Grid = (props) => {
 			);
 }
 
-const isOnline = () => window.navigator.onLine;
 
 const Item = (props) => {
 	const { data } = props;
 	return (
 			<div className="item background-pearl">
 				<header>
-					{/*data.imgSource && <img src={require(`./img/covers/${data.imgSource}`)}/>*/}
 					<div className="item-info">
 						<h1 className="item-heading">{data.artist}</h1>
 					{data.id ? <Link to={`/release/${data.id}`}><h2 className="item-sub-heading">{data.name}</h2></Link>
@@ -84,26 +81,32 @@ const Item = (props) => {
 						</div>
 					</div>
 				</header>
-				{ isOnline() ?
-				(data.previewHTML &&
-					<div dangerouslySetInnerHTML={{ __html: data.previewHTML }} />
-				) :
-					<div className="error notice">
-						<h2 className="sans">Can't load stream :(</h2>
-						<small>Your connection has been lost. Please try again when you find it.</small>
-					</div>
-				}
+
+				<WatchConnection render={ online => (
+					online ? 
+					(data.previewHTML &&
+						<div dangerouslySetInnerHTML={{ __html: data.previewHTML }} />
+					)
+					:
+						<OfflineError/>
+					)}
+				/>
+
 				{data.trackList &&
 					<aside>
-						<div className="track-list">
-							<h2 onMouseUp={(e) => {expandList(e)}}>Track list <span></span></h2>
-							<ol>
-						{	data.trackList.map((track, i) => (
-								<li key={i}>{track}</li>
-								))
-						}
-							</ol>
-						</div>
+						<ToggleClass className="track-list" toggleClass="expanded">
+							{toggle => (
+								<div>
+								<h2 onMouseUp={toggle}>Track list <span></span></h2>
+									<ol>
+									{	data.trackList.map((track, i) => (
+										<li key={i}>{track}</li>
+										))
+									}
+									</ol>
+								</div>
+							)}
+						</ToggleClass>
 					</aside>
 				}
 			</div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import  React, { Component } from 'react';
 import {
 	BrowserRouter as Router,
 	Route,
@@ -17,17 +17,16 @@ import NoMatch from './views/NoMatch';
 import { Zoom, FadeZoom, MenuTranslate } from './animations';
 import './styles/index.scss';
 
-class App extends React.Component {
-	constructor(props, context) {
-		super(props, context);
-		this.state = { 
+class App extends Component {
+
+		state = { 
 			show: false, 
 			showZoom: false, 
 			showOuter: false, 
 			intro: true, 
 			showMenu: false, 
 		};
-	}
+
 	componentWillMount(){
 		this.setState({
 			show: true, 
@@ -62,9 +61,11 @@ class App extends React.Component {
 
 		}
 	}
-	stripSlash = (path) => {     
+
+	stripSlash = (path) => {
 		return path.replace(/^\//, "");
 	} 
+
 	render() {
 		const { pathname } = this.props.location;
 		return (

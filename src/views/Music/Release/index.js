@@ -1,9 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Fade } from '../../../animations/';
 import releases from '../releases.json';
-import {
-  Link
-} from 'react-router-dom';
+import { WatchConnection, OfflineError, ToggleClass } from '../../../components';
 
 function expandList(e) {
 	e.target.parentElement.classList.toggle('expanded');
@@ -74,21 +73,30 @@ const ReleaseItem = (props) => {
 				}
 				{ data.trackList &&
 				<aside>
-					<div className="track-list">
-						<h2 onMouseUp={(e) => {expandList(e)}}>Track list <span></span></h2>
-						<ol>
-					{	data.trackList.map((track, i) => (
-							<li key={i}>{track}</li>
-							))
+					<ToggleClass className="track-list" toggleClass="expanded">
+					{toggle => 
+						<div>
+							<h2 onMouseUp={toggle}>Track list <span></span></h2>
+							<ol>
+							{	data.trackList.map((track, i) => (
+								<li key={i}>{track}</li>
+								))
+							}
+							</ol>
+						</div>
 					}
-						</ol>
-					</div>
+					</ToggleClass>
 				</aside>
 				}
 				{data.previewHTML &&
 					<div>
 						<h2 className="heading heading-dark">Preview</h2>
-						<div dangerouslySetInnerHTML={{ __html: data.previewHTML }} />
+						<WatchConnection render={ online => (
+							online ?
+							<div dangerouslySetInnerHTML={{ __html: data.previewHTML }} />
+							:
+							<OfflineError/>
+						)}/>
 					</div>
 				}
 
