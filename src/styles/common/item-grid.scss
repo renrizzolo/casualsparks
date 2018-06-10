@@ -74,14 +74,14 @@
 	grid-template-rows: auto;
 	justify-items: start;
  	grid-template-columns: repeat(3, 1fr);
-  grid-gap:2rem;
-  margin-bottom: 5rem;
-  	--item-spacing: 2rem;
+  grid-gap: $padding-default;
+  margin-bottom: $padding-default * 2;
+  	--item-spacing: $padding-small;
 	@include maxwidth(s){
-		--item-spacing: 1.5rem;
+		--item-spacing: $padding-small;
 	}
 	@include maxwidth(xs){
-		--item-spacing: 1rem;
+		--item-spacing: $padding-small;
 	}
 	.link-container{
 		display: flex;
@@ -97,7 +97,7 @@
     grid-column-start: 3;
     width: 300%;
     margin: 0;
-    margin-left: calc(-200% - 5rem);
+    margin-left: calc(-200% - #{$padding-default} * 2);
     text-align: left;
     line-height: 1.5;
 		z-index: 0;
@@ -111,10 +111,10 @@
     &:before{
     	content: "";
     	height: 4px;
-    	width: calc(100% + 8rem);
+    	width: calc(100% + #{$padding-default} * 3);
     	position: absolute;
     	top: calc(50% - 2px);
-    	left: -3rem;
+    	left: -$padding-default;
     	background-color: $secondary;
     	z-index: -1;
     	margin: 0 auto;
@@ -130,10 +130,10 @@
 		grid-template-columns: repeat(2, 1fr);
 		.item-grid__heading{
 			width: 200%;
-    	margin-left: calc(-100% - 3rem);
+    		margin-left: calc(-100% - #{$padding-default});
 			grid-column-start: 2;
 			&:before{
- 	    	width: calc(100% + 6rem);
+ 	    	width: calc(100% + $padding-default * 2);
 			}
 		}
   }

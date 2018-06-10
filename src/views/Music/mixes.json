@@ -1,5 +1,11 @@
 	[
 	{
+		"name": "Casual Sparks vinyl mix vol. III",
+		"artist": "Ren Riz",
+		"previewHTML": "<iframe width='100%' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/422712627&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true'></iframe>"
+
+	},
+	{
 		"name": "Casual Sparks vinyl mix vol. II",
 		"artist": "Ren Riz",
 		"previewHTML": "<iframe width='100%' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/158611186&amp;color=%230066cc&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false'></iframe>",

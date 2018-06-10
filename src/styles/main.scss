@@ -102,9 +102,9 @@ h2{
   	}
 }
 .full-page-container{
-  padding: 3em;
+  padding: $padding-default;
   @include maxwidth(xs) {
-  	padding: 1.5em;
+  	padding: $padding-small;
   }
 }
 .flex-container{
@@ -403,10 +403,13 @@ h2{
 }
 
 .release-cover__container{
-	display: flex;
+  display: flex;
   align-items: flex-end;
   justify-content: flex-end;
   margin-right: 12rem;
+  @include maxwidth(s) {
+  	margin-right: 0rem;
+  }
   img{
   	max-width: 500px;
   }
@@ -515,12 +518,15 @@ $button-horizontal-padding: 0.75em;
 
 .page-header {
   margin-top: 0;
-  padding-left: 3rem;
+  padding-left: $padding-default;
   padding-top: 9rem;
   padding-bottom: 0rem;
   @include maxwidth(xs) {
+  	padding-right: $padding-small;
+  }
+  @include maxwidth(xs) {
 		flex-direction: column;
-		padding-left: 1.5rem;
+		padding-left: $padding-small;
 	}
   h1{
   	font-family: $font-sans;
@@ -803,7 +809,7 @@ $button-horizontal-padding: 0.75em;
 	left: 0;
 	top: 0;
 	z-index:2;
-	margin: 1em 3em;
+	margin: 1em $padding-default;
 	position: absolute;
 	display: flex;
 	animation: logo-in 1s ease forwards;
