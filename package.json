@@ -1,6 +1,6 @@
 {
   "name": "casualsparks",
-  "version": "0.0.1",
+  "version": "0.1.2",
   "description": "Casual Sparks is a record label",
   "main": "index.js",
   "scripts": {

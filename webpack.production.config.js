@@ -8,7 +8,7 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
 
 const SERVICE_WORKER_NAME = 'service-worker.js';
-const PRECACHE_ID = 'cs-react-v1-1';
+const PRECACHE_ID = 'cs-react-v1-2';
 const ROOT_URL = 'https://casualsparks.com/';
 const FAVICON = 'Casual-Sparks-light-blue-32.png';
 
