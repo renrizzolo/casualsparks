@@ -83,12 +83,12 @@
 	@include maxwidth(xs){
 		--item-spacing: $padding-small;
 	}
-	.link-container{
+	.link-container {
 		display: flex;
 	  flex-wrap: wrap;
 		margin-bottom: var(--item-spacing);
 	}
-  .item-grid__heading{
+  .item-grid__heading {
   	position: relative;
   	font-size: 3.5em;
   	@include maxwidth(s){
@@ -109,6 +109,8 @@
       padding: 0 1rem;
     }
     &:before{
+    	transform: translateX(-100%);
+    	animation: headline-in 850ms cubic-bezier(1, 0.01, 0.3, 1) 850ms forwards;
     	content: "";
     	height: 4px;
     	width: calc(100% + #{$padding-default} * 3);
@@ -133,7 +135,7 @@
     		margin-left: calc(-100% - #{$padding-default});
 			grid-column-start: 2;
 			&:before{
- 	    	width: calc(100% + $padding-default * 2);
+ 	    	width: calc(100% + #{$padding-default} * 2);
 			}
 		}
   }

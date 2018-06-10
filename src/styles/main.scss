@@ -642,6 +642,14 @@ $button-horizontal-padding: 0.75em;
   }
 }
 
+@keyframes headline-in {
+	0% {
+	  transform: translateX(-100%);
+	}
+  	100% {
+	  transform: translateX(0);
+  	}
+}
 
 
 
@@ -651,10 +659,11 @@ $button-horizontal-padding: 0.75em;
 	#REACT-CSS-TRANSITIONS 
 \*------------------------------------*/
 
+
 .star-enter, .star-appear {
 	fill: transparent;
 	transform: translate(-350px, 250px);
-  transition: all 200ms 1.5s ease;
+  	transition: all 200ms 1.5s ease;
 }
 
 .star-enter.star-enter-active, .star-appear.star-appear-active {

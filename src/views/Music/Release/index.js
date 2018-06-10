@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Fade } from '../../../animations/';
 import releases from '../releases.json';
 import { WatchConnection, OfflineError, ToggleClass } from '../../../components';
 
